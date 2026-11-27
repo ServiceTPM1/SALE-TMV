@@ -1,0 +1,257 @@
+<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>The Modern View | 3D Experience</title><style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#090a0d;color:#f1f4f6;font-family:Arial,'Noto Sans Thai',sans-serif}button,input{font:inherit}button{cursor:pointer;border:1px solid #ffffff26;background:#ffffff0d;color:#f6f7f8;border-radius:9px;padding:10px 13px;touch-action:manipulation}button:hover{background:#ffffff20}button.active{background:#d0a66e;color:#17191b;border-color:#d0a66e;font-weight:700}button:disabled{opacity:.45;cursor:default}#viewport{position:fixed;inset:0;touch-action:none}canvas{display:block}header{position:fixed;top:16px;left:16px;right:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;pointer-events:none}.brand,.panel,.topbuttons,.hint{background:#111217ed;border:1px solid #ffffff21;box-shadow:0 6px 26px #10182022;border-radius:14px;backdrop-filter:blur(14px);pointer-events:auto}.brand{padding:14px 18px;letter-spacing:2px;font-size:17px;font-weight:bold}.brand small{display:block;color:#d0a66e;font-size:10px;letter-spacing:3px;margin-top:5px}.topbuttons{display:flex;padding:6px;gap:5px;flex-wrap:wrap;justify-content:flex-end}.panel{position:fixed;top:101px;left:16px;width:292px;padding:16px;max-height:calc(100vh - 120px);overflow:auto}.eyebrow{font-size:10px;letter-spacing:2px;color:#d0a66e;margin-bottom:10px}.panel h2{font-size:17px;margin:0 0 10px}.modes{display:grid;gap:7px}.modes button{text-align:left;display:flex;align-items:center;justify-content:space-between}.modes small{font-size:10px;opacity:.75}.section{margin-top:14px;border-top:1px solid #ffffff20;padding-top:13px}.section p,.hint{font-size:12px;line-height:1.6;color:#c7d0d7}.section p{margin:8px 0}.section input{width:100%;accent-color:#d0a66e}.checks{display:grid;gap:8px;font-size:13px;margin-top:8px}.checks input{width:auto}.row{display:flex;gap:6px}.row button{flex:1;font-size:12px}.hint{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);padding:10px 15px;text-align:center;max-width:calc(100% - 32px);white-space:normal}.status{position:fixed;right:16px;bottom:16px;color:#8d929b;font-size:11px;pointer-events:none}.loading{position:fixed;inset:0;display:grid;place-items:center;background:#151b22;color:white;z-index:20;text-align:center;padding:25px}.loading h1{letter-spacing:4px;font-size:23px}.loading p{color:#a9b8c3;max-width:460px;line-height:1.7}.progress{height:3px;background:#39434c;border-radius:6px;overflow:hidden}.progress div{height:100%;width:5%;background:#d0a66e;transition:width .2s}.hidden{display:none!important}#mobile{position:fixed;bottom:75px;left:20px;display:none;grid-template-columns:repeat(3,48px);gap:5px;touch-action:none}#mobile button{height:48px;background:#171d24d9;font-size:20px;user-select:none}#crosshair{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:5px;height:5px;background:#fff;border-radius:50%;box-shadow:0 0 3px #000;pointer-events:none}.tag{color:#a8bac6;font-size:11px;margin-top:12px}.swatch{display:flex;align-items:center;gap:8px}.chip{width:18px;height:18px;border-radius:4px;border:1px solid #fff4;background-size:cover;background-position:center}
+/* Mobile-first controls: a collapsible bottom dock, independent of the canvas. */
+#sheetToggle{display:none}.control-scroll{display:block}.compact-icon{display:none}
+@media(max-width:700px), (max-height:500px) and (pointer:coarse){
+ html,body{height:100%;height:100dvh;overscroll-behavior:none;-webkit-text-size-adjust:100%}
+ header{top:calc(env(safe-area-inset-top,0px) + 8px);left:calc(env(safe-area-inset-left,0px) + 8px);right:calc(env(safe-area-inset-right,0px) + 8px);gap:6px;align-items:center;z-index:5}
+ .brand{padding:9px 10px;letter-spacing:1px;font-size:12px;line-height:1.18;flex:1;min-width:0;max-width:220px;box-shadow:none}.brand small{font-size:8px;letter-spacing:1.1px;margin-top:3px}
+ .topbuttons{padding:3px;gap:3px;flex-wrap:nowrap;flex-shrink:0;box-shadow:none}.topbuttons button{padding:0;width:42px;min-height:44px;font-size:19px;display:grid;place-items:center}.topbuttons .wide-label{display:none}.compact-icon{display:inline;line-height:1}
+ #viewport{top:var(--view-top,68px);bottom:var(--view-bottom,100px);left:0;right:0}
+ .panel{left:calc(env(safe-area-inset-left,0px) + 8px);right:calc(env(safe-area-inset-right,0px) + 8px);top:auto;bottom:calc(env(safe-area-inset-bottom,0px) + 8px);width:auto;max-height:none;padding:8px;border-radius:16px;overflow:visible;z-index:6;display:flex;flex-direction:column;gap:6px;background:#111217f5;box-shadow:0 4px 22px #0004;backdrop-filter:none}
+ .panel h2,.eyebrow,.tag{display:none}.modes{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;flex:none}.modes button{display:block;text-align:center;font-size:12px;min-height:44px;padding:7px 3px;line-height:1.3;white-space:nowrap}.modes small{display:none}
+ #sheetToggle{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;min-height:34px;padding:4px 8px;font-size:12px;color:#d9c4a4;border:0;background:transparent;touch-action:manipulation;flex:none}.chevron{display:inline-block;transition:transform .18s}.panel.sheet-open .chevron{transform:rotate(180deg)}
+ .control-scroll{display:none;max-height:37vh;max-height:37dvh;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;-webkit-overflow-scrolling:touch;padding:0 3px 4px}.panel.sheet-open .control-scroll{display:block}
+ .section{margin-top:8px;padding-top:9px}.section:first-child{margin-top:0}.section p{font-size:12px}.section strong,.section>label{font-size:13px}.checks{display:flex;flex-wrap:wrap;gap:8px 12px}.checks label{min-height:36px;display:flex;gap:6px;align-items:center}.checks input{width:19px;height:19px;margin:0}.row button{min-width:0;min-height:44px;padding:7px 5px;font-size:12px}.section input[type=range]{height:32px;margin:0;touch-action:pan-y}.swatch{font-size:12px}
+ .hint,.status{display:none}#crosshair{top:calc(var(--view-top,68px) + (100dvh - var(--view-top,68px) - var(--view-bottom,100px))/2)}
+ body.walk #mobile{display:grid;bottom:calc(var(--view-bottom,100px) + 10px);left:calc(env(safe-area-inset-left,0px) + 12px);grid-template-columns:repeat(3,48px);gap:4px;z-index:4}body.walk.sheet-expanded #mobile{display:none}#mobile button{width:48px;height:48px;padding:0;touch-action:none;background:#171d24e8;-webkit-user-select:none}
+ body.walk #walkTools p{display:none}
+}
+@media(max-width:360px){.brand small{display:none}.brand{font-size:11px}.topbuttons button{width:38px}.modes button{font-size:11px}}
+@media(max-height:500px) and (pointer:coarse){.control-scroll{max-height:30dvh}.brand small{display:none}.panel{max-width:560px;left:50%;right:auto;transform:translateX(-50%);width:calc(100% - 20px)}.modes button{min-height:38px}#sheetToggle{min-height:28px}}
+
+#tourOverlay{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:2}#tourFade{position:absolute;inset:0;background:#090a0d;opacity:0;pointer-events:none;z-index:4} .tour-bubble{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:4px;padding:0;background:none!important;border:0;min-width:44px;min-height:44px;pointer-events:auto;touch-action:manipulation}.tour-bubble[hidden]{display:none!important}.tour-ring{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:2px solid #ead6b3;background:#f7e8d32b;box-shadow:0 0 0 5px #efdeb31c,0 2px 12px #0007;color:white;text-shadow:0 1px 3px #000;font-size:21px;font-weight:bold;backdrop-filter:blur(3px)}.tour-bubble.door .tour-ring{border-color:#e4c28a;background:#3c2919a8;color:#ffdfaa}.tour-bubble.opened .tour-ring{border-color:#a8ddc1;color:#a8ddc1}.tour-name{max-width:140px;padding:4px 8px;border-radius:10px;background:#111217de;border:1px solid #ffffff30;font-size:11px;line-height:1.25;white-space:nowrap;color:white;text-shadow:0 1px 2px #000}#tourQuick{display:none;position:absolute;top:8px;left:50%;transform:translateX(-50%);z-index:3;width:min(270px,90%);background:#111217e8;border:1px solid #ffffff30;border-radius:12px;padding:5px;pointer-events:auto}body.walk #tourQuick{display:block}#tourSelect{width:100%;background:#26282f;color:#fff;border:1px solid #ffffff25;border-radius:8px;padding:9px;font:inherit;font-size:13px;min-height:40px}#tourTitle{font-size:11px;line-height:1.4;text-align:center;color:#dfc59b;min-height:15px;margin-top:3px}body.walk #tourOverlay{display:block}body:not(.walk) #tourOverlay{display:none}@media(max-width:700px){#tourQuick{width:min(240px,90%)}.tour-ring{width:46px;height:46px}.tour-name{font-size:10px}body.walk.sheet-expanded #tourQuick{display:none}body.walk.sheet-expanded #tourOverlay{display:none}}
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script></head><body>
+<div id="viewport"><div id="tourOverlay"></div><div id="tourFade"></div><div id="tourQuick"><select id="tourSelect" aria-label="เลือกจุดเดินชม"><option value="">เลือกห้อง / จุดชมบ้าน</option></select><div id="tourTitle">แตะวงกลมเพื่อเดินชม</div></div></div><header><div class="brand">THE MODERN VIEW<small>INTERACTIVE RESIDENCE</small></div><div class="topbuttons"><button id="dayBtn" aria-label="กลางวัน" title="กลางวัน"><span class="wide-label">☀ กลางวัน</span><span class="compact-icon" aria-hidden="true">☀</span></button><button id="nightBtn" class="active" aria-label="กลางคืน" title="กลางคืน"><span class="wide-label">☾ กลางคืน</span><span class="compact-icon" aria-hidden="true">☾</span></button><button id="reset" aria-label="รีเซ็ต" title="รีเซ็ต"><span class="wide-label">↺ รีเซ็ต</span><span class="compact-icon" aria-hidden="true">↺</span></button><button id="full" aria-label="เต็มจอ" title="เต็มจอ"><span class="wide-label">⛶ เต็มจอ</span><span class="compact-icon" aria-hidden="true">⛶</span></button></div></header>
+<aside class="panel"><div class="eyebrow">EXPLORE THE VILLA</div><h2>เลือกมุมมอง</h2><div class="modes"><button data-mode="orbit" class="active">360° รอบบ้าน <small>01</small></button><button data-mode="explode">แยกชั้นบ้าน <small>02</small></button><button data-mode="walk">เดินชมบ้าน <small>03</small></button></div>
+<button id="sheetToggle" type="button" aria-expanded="false" aria-controls="controlScroll"><span class="chevron" aria-hidden="true">⌃</span><span id="sheetLabel">ตัวเลือกเพิ่มเติม</span></button><div id="controlScroll" class="control-scroll"><div id="orbitTools" class="section"><div class="row"><button id="auto">หมุนอัตโนมัติ</button><button id="top">มุมสูง</button></div><p>ลากเพื่อหมุน · เลื่อนเพื่อซูม · ลากสองนิ้วเพื่อเลื่อนตำแหน่ง</p></div>
+<div id="explodeTools" class="section hidden"><label for="spread">ระยะห่างระหว่างชั้น <span id="distance">3.0 ม.</span></label><input id="spread" type="range" min="0" max="5" step="0.1" value="3"><div class="checks"><label><input type="checkbox" data-layer="0" checked> ชั้น 1</label><label><input type="checkbox" data-layer="1" checked> ชั้น 2</label><label><input type="checkbox" data-layer="2" checked> หลังคา</label></div><div class="row" style="margin-top:10px"><button id="only1">ดูชั้น 1</button><button id="only2">ดูชั้น 2</button><button id="all">ทั้งหมด</button></div><div class="row" style="margin-top:6px"><button id="floorTop">มุมสูงดูแปลน</button></div></div>
+<div id="walkTools" class="section hidden"><div class="row"><button id="floor1" class="active">ชั้น 1</button><button id="floor2">ชั้น 2</button></div><p>W A S D หรือปุ่มลูกศรเพื่อเดิน · ลากภาพเพื่อหันมอง · Shift เพื่อเดินเร็ว</p><div class="row"><button id="spawn">กลับจุดเริ่มเดิน</button></div><div class="checks"><label><input type="checkbox" id="tourToggle" checked> แสดงจุดนำทางและปุ่มประตู</label></div><div class="row"><button id="tourDoorsClose">ปิดประตูทั้งหมดที่รองรับ</button></div></div>
+<div class="section"><strong>เลือกวัสดุผนังก่ออิฐเท่านั้น</strong><div class="row" style="margin-top:8px"><button id="finishColor" class="active">#AB9A88</button><button id="finishPaint">ผิวปูน</button><button id="finishShingle">Shingle</button></div><div class="checks" style="margin-top:8px"><div class="swatch"><span class="chip" style="background-image:url('./wall_plaster.jpg')"></span> ผิวปูน/เทกเจอร์</div><div class="swatch"><span class="chip" style="background-image:url('./wall_shingle.jpg')"></span> ลาย Shingle</div></div></div>
+<div class="section checks"><label><input id="furnToggle" type="checkbox" checked> แสดงเฟอร์นิเจอร์และสุขภัณฑ์</label><div style="display:flex;align-items:center;gap:7px"><span style="width:17px;height:17px;background:#AB9A88;border-radius:4px;border:1px solid #fff5"></span> สีมาตรฐาน #AB9A88</div></div><div class="tag">TMV · interactive tour edition</div></div></aside>
+<div id="mobile" class="hidden"><span></span><button data-key="KeyW">↑</button><span></span><button data-key="KeyA">←</button><button data-key="KeyS">↓</button><button data-key="KeyD">→</button></div><div id="crosshair" class="hidden"></div><div class="hint" id="hint">ลากเพื่อหมุนชมบ้าน 360° · ซูมเพื่อดูรายละเอียด</div><div class="status">3D MODEL · REAL SCALE</div><div class="loading" id="loading"><div><h1>THE MODERN VIEW</h1><p id="loadtext">กำลังโหลดโมเดลบ้าน 3D</p><div class="progress"><div id="bar"></div></div></div></div>
+<script>
+(()=>{
+const media=matchMedia('(max-width:700px), (max-height:500px) and (pointer:coarse)');
+const panel=document.querySelector('.panel'),header=document.querySelector('header'),toggle=document.getElementById('sheetToggle'),label=document.getElementById('sheetLabel');
+function measure(){if(!media.matches)return; const vh=document.documentElement.clientHeight; document.documentElement.style.setProperty('--view-top', Math.ceil(header.getBoundingClientRect().bottom+5)+'px');document.documentElement.style.setProperty('--view-bottom', Math.max(0,Math.ceil(vh-panel.getBoundingClientRect().top+5))+'px');}
+function setOpen(open){panel.classList.toggle('sheet-open',open);document.body.classList.toggle('sheet-expanded',open);toggle.setAttribute('aria-expanded',String(open));label.textContent=open?'ซ่อนตัวเลือก':'ตัวเลือกเพิ่มเติม';measure();}
+window.tmvMobileLayout={media,measure,setOpen};toggle.addEventListener('click',()=>setOpen(!panel.classList.contains('sheet-open')));
+const ro=new ResizeObserver(measure);ro.observe(panel);ro.observe(header);window.addEventListener('resize',measure);window.visualViewport?.addEventListener('resize',measure);media.addEventListener('change',()=>setOpen(false));setOpen(false);
+})();
+</script>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {RoundedBoxGeometry} from 'three/addons/geometries/RoundedBoxGeometry.js';
+import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
+
+const $=id=>document.getElementById(id), scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(47,innerWidth/innerHeight,.10,135);
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:false});
+renderer.setPixelRatio(Math.min(devicePixelRatio,window.tmvMobileLayout.media.matches?1.35:1.8));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.15;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;$('viewport').appendChild(renderer.domElement);
+
+const pmrem=new THREE.PMREMGenerator(renderer);const roomEnv=new RoomEnvironment();scene.environment=pmrem.fromScene(roomEnv,.05).texture;scene.environmentIntensity=.58;roomEnv.dispose();pmrem.dispose();
+const hemi=new THREE.HemisphereLight(0xffffff,0x43434a,1.20);scene.add(hemi);
+const sun=new THREE.DirectionalLight(0xfff0db,2.65);sun.position.set(12,23,15);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-20,right:20,top:22,bottom:-22,near:.5,far:90});sun.shadow.normalBias=.012;sun.shadow.bias=-.00013;sun.shadow.radius=3;scene.add(sun);
+const fill=new THREE.DirectionalLight(0xc9ddff,1.15);fill.position.set(-17,11,8);scene.add(fill);
+const rim=new THREE.DirectionalLight(0xffe0b7,2.1);rim.position.set(5,18,-22);scene.add(rim);
+const topLight=new THREE.DirectionalLight(0xffffff,.55);topLight.position.set(-4,28,-3);scene.add(topLight);
+const walkFill=new THREE.PointLight(0xffecd4,5.0,9,2);walkFill.visible=false;camera.add(walkFill);scene.add(camera);
+const houseGlow=[];
+function addHouseLight(x,y,z,color=0xffd9a3,intensity=1.4,distance=10){const p=new THREE.PointLight(color,intensity,distance,2);p.position.set(x,y,z);p.castShadow=false;p.visible=false;scene.add(p);houseGlow.push(p)}
+addHouseLight(-5.4,2.3,1.4);addHouseLight(5.6,2.4,5.8);addHouseLight(5.5,2.0,1.0);addHouseLight(5.5,2.0,-6.0);addHouseLight(-5.5,5.2,-1.2);addHouseLight(5.5,5.2,-4.2);
+
+const c=document.createElement('canvas');c.width=c.height=512;const ctx=c.getContext('2d');const grad=ctx.createRadialGradient(256,256,20,256,256,256);grad.addColorStop(0,'#34363d');grad.addColorStop(.35,'#25272e');grad.addColorStop(.65,'#14161b');grad.addColorStop(1,'#08090c');ctx.fillStyle=grad;ctx.fillRect(0,0,512,512);const floorTex=new THREE.CanvasTexture(c);floorTex.colorSpace=THREE.SRGBColorSpace;
+const groundMat=new THREE.MeshStandardMaterial({map:floorTex,color:0xffffff,roughness:.89,metalness:.04});
+const ground=new THREE.Mesh(new THREE.PlaneGeometry(110,110),groundMat);ground.rotation.x=-Math.PI/2;ground.position.y=-.045;ground.receiveShadow=true;scene.add(ground);
+
+const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.dampingFactor=.08;controls.maxPolarAngle=Math.PI/2-.015;controls.minDistance=2;controls.maxDistance=75;controls.autoRotateSpeed=.75;controls.target.set(0,2.7,0);camera.position.set(22,17,27);controls.update();
+
+let model,layers=[],mode='orbit',floor=0,auto=false,spread=3,visible=[true,true,true],yaw=0,pitch=0,drag=null;
+const keys=new Set(), ray=new THREE.Raycaster(), down=new THREE.Vector3(0,-1,0);let obstacles=[], furnitureRoots=[], structural=[];const wallCandidates=[];
+function activeObstacles(){return obstacles.filter(o=>{for(let p=o;p;p=p.parent)if(!p.visible)return false;return true})}
+const clock=new THREE.Clock();const v=new THREE.Vector3();const foot=[.60,3.95];const eye=1.62;let walkY=foot[0];
+
+const texLoader=new THREE.TextureLoader();
+function prepTex(path, x, y, srgb=true){const t=texLoader.load(path);if(srgb)t.colorSpace=THREE.SRGBColorSpace;t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(x,y);t.anisotropy=Math.min(renderer.capabilities.getMaxAnisotropy(),8);return t}
+const plaster=prepTex('./wall_plaster.jpg',1.25,1.875),shingle=prepTex('./wall_shingle.jpg',.8,1.2),bump=prepTex('./wall_plaster.jpg',1.25,1.875,false);
+const wallFinishes={color:new THREE.MeshStandardMaterial({color:0xAB9A88,bumpMap:bump,bumpScale:.013,roughness:.92,side:THREE.DoubleSide}),paint:new THREE.MeshStandardMaterial({color:0xffffff,map:plaster,bumpMap:bump,bumpScale:.013,roughness:.92,side:THREE.DoubleSide}),shingle:new THREE.MeshStandardMaterial({color:0xffffff,map:shingle,roughness:.93,side:THREE.DoubleSide})};
+let currentFinish='color',currentTheme='night';
+function resetOrbit(top=false){camera.position.set(top?0:22,top?40:20,top ? 0.01 : 28);controls.target.set(0,mode==='explode'?4.8:2.7,0);controls.update()}
+function applyLayers(){layers.forEach((g,i)=>{g.visible=mode==='explode'?visible[i]:true});document.querySelectorAll('[data-layer]').forEach(el=>el.checked=visible[Number(el.dataset.layer)]);}
+function setMode(m){cancelNav();mode=m;if(window.tmvMobileLayout.media.matches)window.tmvMobileLayout.setOpen(false);resizeViewer();walkFill.visible=m==='walk';document.body.classList.toggle('walk',m==='walk');document.querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('active',b.dataset.mode===m));['orbit','explode','walk'].forEach(s=>$(s+'Tools').classList.toggle('hidden',s!==m));$('mobile').classList.toggle('hidden',m!=='walk');$('crosshair').classList.toggle('hidden',m!=='walk');controls.enabled=m!=='walk';controls.autoRotate=m==='orbit'&&auto;keys.clear();applyLayers();if(m==='walk'){layers.forEach(g=>g.position.y=0);model?.updateMatrixWorld(true);spawn(floor)}else resetOrbit();$('hint').textContent={orbit:'ลากเพื่อหมุนชมบ้าน 360° · ซูมเพื่อดูรายละเอียด',explode:'ปรับระยะห่าง หรือซ่อนแต่ละชั้นเพื่อดูพื้นที่ภายใน',walk:'แตะฟองใสเพื่อเดินชม · แตะประตูเพื่อเปิดหรือปิด'}[m]}
+function getFloor(x,z,base){ray.set(new THREE.Vector3(x,base+.35,z),down);ray.near=0;ray.far=.75;const hits=ray.intersectObjects(structural,false);return hits.find(h=>h.face&&Math.abs(h.face.normal.y)>.65)?.point.y??null}
+function canStand(x,z,base){const h=getFloor(x,z,base);if(h===null)return false;for(let i=0;i<8;i++){const a=i*Math.PI/4;ray.set(new THREE.Vector3(x,h+eye*.75,z),new THREE.Vector3(Math.cos(a),0,Math.sin(a)));ray.far=.55;ray.near=0;if(ray.intersectObjects(activeObstacles(),false).length)return false;}return true}
+function spawn(f){cancelNav();selectedPoint=null;floor=f;walkY=foot[f];let start=f===0?[0,7.8]:[-1,0];if(model){let found=false;for(const z of (f===0?[7.8,6,4,2,0,-2,-4,-6,-8]:[0,2,-2,4,-4,6,-6])){for(const x of [0,1,-1,2,-2,3,-3,4,-4,5,-5,6,-6])if(canStand(x,z,foot[f])){start=[x,z];found=true;break;}if(found)break;}walkY=getFloor(start[0],start[1],foot[f])??foot[f]}camera.position.set(start[0],walkY+eye,start[1]);yaw=0;pitch=0;camera.rotation.order='YXZ';camera.rotation.set(pitch,yaw,0);$('floor1').classList.toggle('active',f===0);$('floor2').classList.toggle('active',f===1)}
+function blocked(dir,len){for(const h of [.40,1.2,1.57]){ray.set(new THREE.Vector3(camera.position.x,walkY+h,camera.position.z),dir);ray.near=.01;ray.far=len+.23;if(ray.intersectObjects(activeObstacles(),false).length)return true}return false}
+function walkStep(dt){let z=(keys.has('KeyW')||keys.has('ArrowUp')?1:0)-(keys.has('KeyS')||keys.has('ArrowDown')?1:0),x=(keys.has('KeyD')||keys.has('ArrowRight')?1:0)-(keys.has('KeyA')||keys.has('ArrowLeft')?1:0);if(!x&&!z)return;v.set(x,0,-z).normalize().applyAxisAngle(new THREE.Vector3(0,1,0),yaw);const step=dt*(keys.has('ShiftLeft')?3.1:1.7);if(blocked(v,step))return;const nx=camera.position.x+v.x*step,nz=camera.position.z+v.z*step;if(Math.abs(nx)>8.1||Math.abs(nz)>11.2)return;const h=getFloor(nx,nz,walkY);if(h===null||Math.abs(h-walkY)>.28)return;walkY=h;camera.position.set(nx,walkY+eye,nz)}
+
+function makeBathroomSet(){
+ const g=new THREE.Group();
+ const stone=new THREE.MeshStandardMaterial({color:0xa69e92,roughness:.84});
+ const tile=new THREE.MeshStandardMaterial({color:0x988f84,roughness:.85});
+ const dark=new THREE.MeshStandardMaterial({color:0x17191b,roughness:.45,metalness:.35});
+ const ceramic=new THREE.MeshStandardMaterial({color:0x17191a,roughness:.24,metalness:.08});
+ const interior=new THREE.MeshStandardMaterial({color:0x121416,roughness:.86});
+ const steel=new THREE.MeshStandardMaterial({color:0x85878b,roughness:.3,metalness:.8});
+ const fabric=new THREE.MeshStandardMaterial({color:0x716c62,roughness:1});
+ const curtain=new THREE.MeshStandardMaterial({color:0xc9c3b9,roughness:.95,side:THREE.DoubleSide});
+ function mesh(geo,mat,x,y,z){const o=new THREE.Mesh(geo,mat);o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;g.add(o);return o;}
+ function box(w,h,d,x,y,z,mat,r=0){return mesh(r?new RoundedBoxGeometry(w,h,d,3,r):new THREE.BoxGeometry(w,h,d),mat,x,y,z)}
+ function pipe(points,r,mat=dark){return mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points.map(p=>new THREE.Vector3(...p))),24,r,10,false),mat,0,0,0)}
+ function cyl(r,h,x,y,z,mat){return mesh(new THREE.CylinderGeometry(r,r,h,24),mat,x,y,z)}
+ // Footprint: length 3.6 m, width 1.5 m; all fixtures fit inside the bathroom.
+ // One-piece black toilet, rounded sculpted bowl, lid and tank. Front faces the passage.
+ const profile=[[.0,0],[.15,0],[.18,.035],[.19,.12],[.22,.28],[.235,.37],[.225,.415],[.18,.425],[.0,.425]].map(p=>new THREE.Vector2(...p));
+ const bowl=mesh(new THREE.LatheGeometry(profile,48),ceramic,.68,0,-.33);bowl.scale.set(1.0,1,1.32);
+ box(.46,.055,.64,.68,.44,-.32,ceramic,.055);box(.44,.38,.19,.68,.37,-.60,ceramic,.045);box(.45,.06,.20,.68,.57,-.60,ceramic,.025);cyl(.035,.01,.68,.608,-.60,steel);
+ pipe([[.25,.48,-.67],[.25,.17,-.65],[.39,.12,-.55],[.42,.45,-.65]],.008);box(.035,.16,.025,.42,.53,-.65,dark,.009);
+ // Tiled basin with a real open recess and open storage niche, not solid blocks.
+ const vx=2.0,vz=.39,ww=.86,dd=.59,hh=.84;
+ box(.08,.69,dd,vx-ww/2+.04,.345,vz,stone);box(.08,.69,dd,vx+ww/2-.04,.345,vz,stone);box(ww,.09,dd,vx,.045,vz,stone);box(ww,.61,.045,vx,.38,vz+.27,stone);
+ const bx=.52,bz=.34;
+ box((ww-bx)/2,.10,dd,vx-(ww+bx)/4,.79,vz,stone);box((ww-bx)/2,.10,dd,vx+(ww+bx)/4,.79,vz,stone);
+ box(bx,.10,(dd-bz)/2,vx,.79,vz-(dd+bz)/4,stone);box(bx,.10,(dd-bz)/2,vx,.79,vz+(dd+bz)/4,stone);
+ box(bx,.035,bz,vx,.625,vz,tile);box(.035,.14,bz,vx-bx/2,.70,vz,tile);box(.035,.14,bz,vx+bx/2,.70,vz,tile);box(bx,.14,.035,vx,.70,vz-bz/2,tile);box(bx,.14,.035,vx,.70,vz+bz/2,tile);cyl(.027,.006,vx,.646,vz,steel);
+ pipe([[vx,.84,vz+.23],[vx,1.06,vz+.23],[vx,1.08,vz+.12],[vx,1.06,vz+.02]],.019);box(.06,.018,.025,vx+.04,1.04,vz+.22,dark,.006);
+ box(.23,.29,.28,vx,.24,vz+.05,interior,.035);box(.25,.035,.29,vx,.40,vz+.05,dark,.015);
+ // Three stairs leading to a recessed tiled shower/bathing area.
+ const wetZ=-.28;
+ for(let i=0;i<3;i++){const x=1.64+i*.28,h=(i+1)*.15;box(.28,h,.75,x,h/2,wetZ,tile);box(.22,.014,.55,x,h+.008,wetZ,fabric,.012);}
+ const tx=2.94,tw=.97,td=1.33,tz=0,th=.48;
+ box(tw,.06,td,tx,.03,tz,tile);box(.085,th,td,tx-tw/2+.0425,th/2,tz,tile);box(.085,th,td,tx+tw/2-.0425,th/2,tz,tile);box(tw,th,.085,tx,th/2,tz-td/2+.0425,tile);box(tw,th,.085,tx,th/2,tz+td/2-.0425,tile);cyl(.033,.008,tx,.065,tz,steel);
+ // Black rain shower, perforations, hand shower, flexible hose and heater.
+ const showerX=3.43;
+ box(.05,.18,.18,showerX,1.08,-.15,dark,.008);cyl(.023,.045,showerX-.035,1.08,-.15,dark).rotation.z=Math.PI/2;
+ pipe([[showerX,1.04,.24],[showerX-.04,.65,.24],[showerX-.22,.58,.24],[showerX-.23,.8,.24],[showerX-.1,1.43,.24]],.009);
+ box(.04,.25,.055,showerX-.09,1.51,.24,dark,.012);
+ pipe([[showerX,2.1,-.12],[showerX-.18,2.1,-.12],[showerX-.45,2.1,-.12],[showerX-.45,2.04,-.12]],.015);
+ box(.27,.037,.27,showerX-.45,2.035,-.12,dark,.008);
+ for(let a=0;a<6;a++)for(let k=0;k<6;k++)cyl(.0035,.008,showerX-.45+(a-2.5)*.037,2.013,-.12+(k-2.5)*.037,steel);
+ box(.09,.32,.20,showerX,1.77,.44,steel,.022);box(.014,.09,.11,showerX-.052,1.75,.44,interior,.008);
+ // Fine pleated curtain panel along the bath window, hung from a dark rail.
+ pipe([[2.48,2.20,.69],[3.43,2.20,.69]],.012);
+ const pos=[],ind=[];const nx=80;for(let k=0;k<=nx;k++){let x=2.49+.91*k/nx,z=.65+.022*Math.cos(k/nx*2*Math.PI*9);pos.push(x,.91,z,x,2.17,z);if(k<nx){let i=k*2;ind.push(i,i+2,i+1,i+1,i+2,i+3);}}
+ const cg=new THREE.BufferGeometry();cg.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));cg.setIndex(ind);cg.computeVertexNormals();mesh(cg,curtain,0,0,0);
+ return g;
+}
+function addBathroomFixtures(){
+ // Measured bathroom cells from the floor plans. Independent of sanitized GLTF node names.
+ const placements=[{f:0,p:[3.65,.60,-3.53],rot:0},{f:0,p:[3.65,.60,-1.62],rot:0},{f:1,p:[-3.95,3.95,1.68],rot:Math.PI},{f:1,p:[3.65,3.95,-.97],rot:0}];
+ placements.forEach((p,i)=>{const set=makeBathroomSet();set.name='Bathroom_'+(i+1);set.position.set(...p.p);set.rotation.y=p.rot;layers[p.f].add(set);furnitureRoots.push(set);set.traverse(o=>{if(o.isMesh)obstacles.push(o)});});
+}
+function markWallCandidates(){
+ model.traverse(o=>{if(o.isMesh&&o.material?.name==='TMV_MASONRY_ONLY')wallCandidates.push(o)});
+}
+function applyWallFinish(style){
+ currentFinish=style;
+ for(const [id,s] of [['finishColor','color'],['finishPaint','paint'],['finishShingle','shingle']])$(id).classList.toggle('active',style===s);
+ // Only the explicitly separated masonry triangles use this material. No floor or stair material is touched.
+ const mat=wallFinishes[style];wallCandidates.forEach(mesh=>mesh.material=mat);
+}
+function applyTheme(theme){
+  currentTheme=theme;
+  $('dayBtn').classList.toggle('active',theme==='day'); $('nightBtn').classList.toggle('active',theme==='night');
+  const night=theme==='night';
+  scene.background=new THREE.Color(night?0x08090c:0xd7dee7);
+  scene.fog=new THREE.Fog(night?0x08090c:0xd7dee7, night?42:58, night?105:145);
+  renderer.toneMappingExposure=night?1.05:1.13;
+  scene.environmentIntensity=night?.58:.88;
+  hemi.intensity=night?1.2:1.8;
+  sun.intensity=night?2.65:3.85; sun.color.set(night?0xf6f5f4:0xffffff); sun.position.set(night?12:18,night?23:30,night?15:12);
+  fill.intensity=night?1.15:1.85;
+  rim.intensity=night?1.1:.75;
+  topLight.intensity=night?.55:.95;
+  walkFill.visible=(mode==='walk');walkFill.intensity=night?5:3.2;
+  groundMat.color.set(night?0xffffff:0xf3f4f6);
+  houseGlow.forEach(l=>l.visible=night);
+}
+
+// Interactive navigation. All points are model coordinates, not screen-fixed pins.
+const doorSpecs=[{"id": "Door_01", "f": 0, "name": "ประตูครัว", "pivot": [3.391, 0.6, 6.75], "center": [3.391, 1.975, 6.3], "angle": -1.48}, {"id": "Door_02", "f": 0, "name": "ประตูห้องนอน 1", "pivot": [3.391, 0.6, 1.05], "center": [3.391, 1.975, 0.6], "angle": -1.48}, {"id": "Door_03", "f": 0, "name": "ประตูห้องนอน 2", "pivot": [3.391, 0.6, -6.24999], "center": [3.391, 1.975, -5.79999], "angle": 1.48}, {"id": "Door_04", "f": 0, "name": "ประตูคาราโอเกะ", "pivot": [-3.691, 0.6, 1.0], "center": [-3.691, 1.975, 0.55], "angle": 1.48}, {"id": "Door_05", "f": 0, "name": "ประตูด้านหน้า", "pivot": [-2.05, 0.6, 3.959], "center": [-2.45, 1.975, 3.959], "angle": 1.48}, {"id": "Door_06", "f": 0, "name": "ประตูห้องด้านหน้า", "pivot": [-7.35, 0.6, 5.659], "center": [-6.95, 1.975, 5.659], "angle": 1.48}, {"id": "Door_07", "f": 1, "name": "ประตูห้องนอน 3", "pivot": [-3.809, 3.95, -0.64], "center": [-3.809, 5.325, -1.09], "angle": 1.48}, {"id": "Door_08", "f": 1, "name": "ประตูห้องนอน 4", "pivot": [3.391, 3.95, -3.55], "center": [3.391, 5.325, -4.0], "angle": -1.48}, {"id": "Door_09", "f": 0, "name": "ประตูห้องน้ำ 1", "pivot": [3.54, 0.6, -0.805], "center": [3.99, 2.0, -0.805], "angle": 1.48}, {"id": "Door_10", "f": 0, "name": "ประตูห้องน้ำ 2", "pivot": [3.54, 0.6, -4.395], "center": [3.99, 2.0, -4.395], "angle": -1.48}, {"id": "Door_11", "f": 1, "name": "ประตูห้องน้ำ 3", "pivot": [-3.9, 3.95, 0.815], "center": [-4.35, 5.35, 0.815], "angle": 1.48}, {"id": "Door_12", "f": 1, "name": "ประตูห้องน้ำ 4", "pivot": [3.5, 3.95, -1.795], "center": [3.95, 5.35, -1.795], "angle": -1.48}, {"id": "Door_13", "f": 0, "name": "บานเลื่อนครัวด้านหน้า ซ้าย", "pivot": [4.975, 1.675, 7.53], "center": [4.975, 1.675, 7.53], "angle": 0, "slide": 0.95, "pair": 0}, {"id": "Door_14", "f": 0, "name": "บานเลื่อนครัวด้านหน้า ขวา", "pivot": [5.925, 1.675, 7.58], "center": [5.925, 1.675, 7.58], "angle": 0, "slide": -0.95, "pair": 0}, {"id": "Door_15", "f": 0, "name": "บานเลื่อนครัวด้านใน ซ้าย", "pivot": [4.975, 1.675, 3.93], "center": [4.975, 1.675, 3.93], "angle": 0, "slide": 0.95, "pair": 1}, {"id": "Door_16", "f": 0, "name": "บานเลื่อนครัวด้านใน ขวา", "pivot": [5.925, 1.675, 3.98], "center": [5.925, 1.675, 3.98], "angle": 0, "slide": -0.95, "pair": 1}];
+const tourPoints=[
+ {f:0,n:'หน้าบ้าน',x:2.5,z:7.9,yaw:0}, {f:0,n:'ห้องนั่งเล่น / คาราโอเกะ',x:-5.5,z:2.8,yaw:0},
+ {f:0,n:'ห้องครัว',x:3.85,z:5.55,yaw:-1.57}, {f:0,n:'ห้องนอน 1',x:4.0,z:.65,yaw:-1.57},
+ {f:0,n:'ห้องน้ำ 1',x:4.5,z:-1.5,yaw:-1.57}, {f:0,n:'ห้องนอน 2',x:4.0,z:-5.75,yaw:-1.57},
+ {f:0,n:'ห้องน้ำ 2',x:4.5,z:-3.4,yaw:-1.57}, {f:0,n:'ริมสระว่ายน้ำ',x:2.55,z:1.9,yaw:1.57},
+ {f:0,n:'ทางขึ้นชั้น 2',x:-3.1,z:-3.7,yaw:0,stairs:true,go:1},
+ {f:1,n:'ทางขึ้นบันได',x:-3.1,z:-4.6,yaw:0}, {f:1,n:'ห้องนอน 3',x:-4.5,z:-.95,yaw:1.57},
+ {f:1,n:'ห้องน้ำ 3',x:-5.0,z:1.45,yaw:1.57}, {f:1,n:'ห้องนอน 4',x:4.0,z:-4.0,yaw:-1.57},
+ {f:1,n:'ห้องน้ำ 4',x:4.75,z:-.85,yaw:-1.57}, {f:1,n:'ดาดฟ้า',x:5.1,z:4.2,yaw:0},
+ {f:1,n:'Skywalk',x:-.4,z:-5.35,yaw:-1.57}, {f:1,n:'ลงชั้น 1',x:-3.0,z:-4.3,yaw:3.14,stairs:true,go:0}
+];
+const doorState=[], tourRay=new THREE.Raycaster(), worldPoint=new THREE.Vector3(), screenPoint=new THREE.Vector3(), eyeDir=new THREE.Vector3();
+let showTour=true, navTransition=null, overlayElapsed=1, selectedPoint=null;
+const navOverlay=$('tourOverlay'), navFade=$('tourFade'), navSelect=$('tourSelect'), navTitle=$('tourTitle');
+function tourMessage(s){navTitle.textContent=s;}
+function cancelNav(){navTransition=null;navFade.style.opacity='0';}
+function bubble(label,kind,action){const b=document.createElement('button');b.type='button';b.className='tour-bubble '+kind;b.setAttribute('aria-label',label);const circle=document.createElement('span');circle.className='tour-ring';circle.textContent=kind==='door'?'↔':'➜';const text=document.createElement('span');text.className='tour-name';text.textContent=label;b.append(circle,text);b.addEventListener('pointerdown',e=>e.stopPropagation());b.addEventListener('click',e=>{e.stopPropagation();action()});b.hidden=true;navOverlay.append(b);return {b,text};}
+function initInteractive(){
+ for(const d of doorSpecs){const leaf=model.getObjectByName(d.id);if(!leaf){console.warn('Missing door',d.id);continue;}const p=new THREE.Vector3(...d.pivot),pivot=new THREE.Group();pivot.name=d.id+'_pivot';layers[d.f].add(pivot);pivot.position.copy(p);pivot.add(leaf);leaf.position.copy(p).multiplyScalar(-1);const entry={...d,pivotObj:pivot,leaf,open:false};leaf.traverse(o=>{if(o.isMesh){o.userData.tmvDoor=entry;}});const mark=bubble('เปิด '+d.name,'door',()=>toggleDoor(entry));Object.assign(entry,mark);doorState.push(entry);}
+ model.updateMatrixWorld(true);
+ for(const [i,p] of tourPoints.entries()){const el=document.createElement('option');el.value=String(i);el.textContent='ชั้น '+(p.f+1)+' · '+p.n;navSelect.append(el);Object.assign(p,bubble(p.n,'point',()=>goToPoint(p)));}
+}
+function toggleDoor(d){if(!d.open&&d.slide)for(const mate of doorState)if(mate!==d&&mate.slide&&mate.pair===d.pair&&mate.open)toggleDoor(mate);d.open=!d.open;d.text.textContent=(d.open?'ปิด ':'เปิด ')+d.name;d.b.setAttribute('aria-label',d.text.textContent);d.b.classList.toggle('opened',d.open);tourMessage(d.text.textContent);}
+function safeDestination(p){
+ // Prefer original selected point, then a nearby free patch of floor, within 0.72 m.
+ const base=foot[p.f];for(const r of [0,.20,.40,.60,.72]){const count=r===0?1:12;for(let i=0;i<count;i++){const a=i/count*2*Math.PI,x=p.x+r*Math.cos(a),z=p.z+r*Math.sin(a);if(canStand(x,z,base)){const y=getFloor(x,z,base);return new THREE.Vector3(x,y+eye,z);}}}return null;
+}
+function clearPath(from,to){const dist=from.distanceTo(to);if(dist>5||Math.abs(from.y-to.y)>.13)return false;const step=Math.max(1,Math.ceil(dist/.27));for(let i=1;i<=step;i++){const q=from.clone().lerp(to,i/step);if(!canStand(q.x,q.z,q.y-eye))return false;}return true;}
+function goToPoint(p){if(!model)return;cancelNav();if(mode!=='walk')setMode('walk');if(window.tmvMobileLayout.media.matches)window.tmvMobileLayout.setOpen(false);keys.clear();
+ if(p.stairs){const target=tourPoints.find(q=>q.f===p.go&&(p.go===1?q.n==='ทางขึ้นบันได':q.n==='ริมสระว่ายน้ำ'));if(target){goToPoint(target);return;}}
+ model.updateMatrixWorld(true);const dest=safeDestination(p);if(!dest){tourMessage('พื้นที่ '+p.n+' ยังไม่พบจุดยืนที่ปลอดภัย');return;}
+ const from=camera.position.clone(),fromFloor=floor,fromYaw=yaw;const dy=THREE.MathUtils.euclideanModulo(p.yaw-yaw+Math.PI,Math.PI*2)-Math.PI;
+ navTransition={elapsed:0,duration:.9,from,to:dest,fromYaw,fromPitch:pitch,dy,p,fade:fromFloor!==p.f||!clearPath(from,dest),moved:false};selectedPoint=p;navSelect.value=String(tourPoints.indexOf(p));tourMessage(p.n);
+}
+function arrive(p,dest){floor=p.f;walkY=dest.y-eye;camera.position.copy(dest);yaw=p.yaw;pitch=0;camera.rotation.set(pitch,yaw,0,'YXZ');$('floor1').classList.toggle('active',floor===0);$('floor2').classList.toggle('active',floor===1);}
+function updateNavigation(dt){if(!navTransition)return;const t=navTransition;t.elapsed+=dt;const u=Math.min(1,t.elapsed/t.duration);const ease=u*u*(3-2*u);if(t.fade){navFade.style.opacity=String(Math.sin(Math.PI*u));if(u>=.5&&!t.moved){arrive(t.p,t.to);t.moved=true;}}else{camera.position.lerpVectors(t.from,t.to,ease);walkY=camera.position.y-eye;yaw=t.fromYaw+t.dy*ease;pitch=t.fromPitch*(1-ease);camera.rotation.set(pitch,yaw,0,'YXZ');}if(u>=1){arrive(t.p,t.to);cancelNav();}}
+function projected(vv,el,w,h){screenPoint.copy(vv).project(camera);eyeDir.copy(vv).sub(camera.position);if(eyeDir.dot(camera.getWorldDirection(worldPoint))<=0||screenPoint.z<-1||screenPoint.z>1||Math.abs(screenPoint.x)>.94||Math.abs(screenPoint.y)>.91)return null;return {x:(screenPoint.x*.5+.5)*w,y:(.5-screenPoint.y*.5)*h};}
+function unobstructed(pos,ignoreDoor){const dir=pos.clone().sub(camera.position);const len=dir.length();if(len<.16)return false;tourRay.set(camera.position,dir.normalize());tourRay.near=.04;tourRay.far=Math.max(.04,len-.15);const hits=tourRay.intersectObjects(activeObstacles(),false);return !hits.some(h=>!(ignoreDoor&&h.object.userData.tmvDoor===ignoreDoor));}
+function updateTourOverlay(dt){overlayElapsed+=dt;if(overlayElapsed<.10)return;overlayElapsed=0;const walk=mode==='walk'&&model&&showTour&&!navTransition;const w=$('viewport').clientWidth,h=$('viewport').clientHeight;const placed=[];const candidates=[];
+ for(const p of tourPoints){p.b&&(p.b.hidden=true);if(!walk||p.f!==floor||!p.b||p===selectedPoint&&camera.position.distanceTo(new THREE.Vector3(p.x,foot[p.f]+eye,p.z))<1)continue;const pt=new THREE.Vector3(p.x,foot[p.f]+.13,p.z);const dist=camera.position.distanceTo(pt);if(dist>10||dist<1.7)continue;const xy=projected(pt,p.b,w,h);if(xy)candidates.push({obj:p,pt,xy,dist,door:false});}
+ for(const d of doorState){d.b.hidden=true;if(!walk||d.f!==floor)continue;const pt=new THREE.Vector3(...d.center);pt.y=foot[d.f]+1.35;const dist=camera.position.distanceTo(pt);if(dist>7||dist<.3)continue;const xy=projected(pt,d.b,w,h);if(xy)candidates.push({obj:d,pt,xy,dist,door:true});}
+ candidates.sort((a,b)=>(a.dist-(a.door?.6:0))-(b.dist-(b.door?.6:0)));for(const c of candidates){if(placed.length>=6)break;if(placed.some(q=>Math.abs(q.x-c.xy.x)<90&&Math.abs(q.y-c.xy.y)<50))continue;if(!unobstructed(c.pt,c.door?c.obj:null))continue;c.obj.b.style.left=c.xy.x+'px';c.obj.b.style.top=c.xy.y+'px';c.obj.b.hidden=false;placed.push(c.xy);}
+}
+$('tourToggle').onchange=e=>{showTour=e.target.checked;overlayElapsed=1;};navSelect.onchange=()=>{if(navSelect.value==='')return;const p=tourPoints[Number(navSelect.value)];if(p)goToPoint(p);};
+$('tourDoorsClose').onclick=()=>{for(const d of doorState)if(d.open)toggleDoor(d);tourMessage('ปิดประตูทั้งหมดที่รองรับ');};
+let tapStart=null;const tourCanvas=renderer.domElement;
+tourCanvas.addEventListener('pointerdown',e=>{tapStart={x:e.clientX,y:e.clientY,id:e.pointerId};});
+tourCanvas.addEventListener('pointercancel',()=>tapStart=null);
+tourCanvas.addEventListener('pointerup',e=>{const a=tapStart;tapStart=null;if(!a||a.id!==e.pointerId||Math.hypot(e.clientX-a.x,e.clientY-a.y)>7||!model||navTransition)return;const r=tourCanvas.getBoundingClientRect();tourRay.near=.01;tourRay.far=100;tourRay.setFromCamera(new THREE.Vector2((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1),camera);const hits=tourRay.intersectObjects(activeObstacles(),false);const d=hits[0]?.object.userData.tmvDoor;if(d)toggleDoor(d);});
+
+const loader=new GLTFLoader();
+loader.load('./model.glb',g=>{
+  model=g.scene;scene.add(model);layers=[...model.children];if(layers.length!==3)throw Error('Missing model layers');
+  model.traverse(o=>{if(o.name.startsWith('Furniture_floor_'))furnitureRoots.push(o); if(o.isMesh){o.castShadow=!o.material.transparent;o.receiveShadow=true;obstacles.push(o);let isFurn=false;for(let p=o;p;p=p.parent)if(p.name?.startsWith('Furniture_floor_'))isFurn=true;if(!isFurn)structural.push(o)}});
+  addBathroomFixtures();
+  initInteractive();
+  markWallCandidates();
+  applyWallFinish(currentFinish);
+  applyTheme('night');
+  model.updateMatrixWorld(true);$('bar').style.width='100%';$('loading').classList.add('hidden');
+},p=>{if(p.total)$('bar').style.width=(p.loaded/p.total*100)+'%'},e=>{$('loadtext').textContent='โหลดโมเดลไม่สำเร็จ กรุณาเปิดผ่าน Netlify หรือ local HTTP server และตรวจว่า model.glb อยู่ข้าง index.html';console.error(e)});
+
+$('furnToggle').onchange=e=>furnitureRoots.forEach(g=>g.visible=e.target.checked);
+document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
+$('reset').onclick=()=>{if(mode==='walk')spawn(floor);else resetOrbit()};$('top').onclick=()=>resetOrbit(true);$('floorTop').onclick=()=>resetOrbit(true);
+$('auto').onclick=()=>{auto=!auto;controls.autoRotate=auto&&mode==='orbit';$('auto').classList.toggle('active',auto)};
+$('full').onclick=async()=>{try{if(!document.fullscreenElement)await document.documentElement.requestFullscreen();else await document.exitFullscreen()}catch(e){$('hint').textContent='เบราว์เซอร์นี้ไม่รองรับโหมดเต็มจอ'}};
+$('spread').oninput=e=>{spread=+e.target.value;$('distance').textContent=spread.toFixed(1)+' ม.'};
+document.querySelectorAll('[data-layer]').forEach(el=>el.onchange=()=>{visible[+el.dataset.layer]=el.checked;applyLayers()});
+$('only1').onclick=()=>{visible=[true,false,false];applyLayers()}; $('only2').onclick=()=>{visible=[false,true,false];applyLayers()}; $('all').onclick=()=>{visible=[true,true,true];applyLayers()};
+$('floor1').onclick=()=>spawn(0); $('floor2').onclick=()=>spawn(1); $('spawn').onclick=()=>spawn(floor);
+$('finishColor').onclick=()=>applyWallFinish('color'); $('finishPaint').onclick=()=>applyWallFinish('paint'); $('finishShingle').onclick=()=>applyWallFinish('shingle');
+$('dayBtn').onclick=()=>applyTheme('day'); $('nightBtn').onclick=()=>applyTheme('night');
+window.addEventListener('keydown',e=>{if(mode==='walk'&&['KeyW','KeyA','KeyS','KeyD','ArrowUp','ArrowLeft','ArrowDown','ArrowRight','ShiftLeft'].includes(e.code)){e.preventDefault();keys.add(e.code)}});
+window.addEventListener('keyup',e=>keys.delete(e.code));window.addEventListener('blur',()=>keys.clear());
+const cv=renderer.domElement;cv.addEventListener('pointerdown',e=>{if(mode==='walk'){drag={id:e.pointerId,x:e.clientX,y:e.clientY};cv.setPointerCapture(e.pointerId)}});
+cv.addEventListener('pointermove',e=>{if(mode!=='walk'||!drag||drag.id!==e.pointerId||navTransition)return; yaw-=(e.clientX-drag.x)*.004; pitch=THREE.MathUtils.clamp(pitch-(e.clientY-drag.y)*.004,-1.42,1.42); drag.x=e.clientX; drag.y=e.clientY; camera.rotation.set(pitch,yaw,0,'YXZ')});
+['pointerup','pointercancel','lostpointercapture'].forEach(n=>cv.addEventListener(n,()=>drag=null));
+document.querySelectorAll('[data-key]').forEach(b=>{b.addEventListener('pointerdown',e=>{b.setPointerCapture(e.pointerId);keys.add(b.dataset.key)});['pointerup','pointercancel','lostpointercapture'].forEach(n=>b.addEventListener(n,()=>keys.delete(b.dataset.key)))});
+function resizeViewer(){const mobile=window.tmvMobileLayout.media.matches;const rect=$('viewport').getBoundingClientRect();const w=Math.max(1,Math.round(rect.width)),h=Math.max(1,Math.round(rect.height));camera.aspect=w/h;camera.fov=mobile?(mode==='walk'?Math.min(82,Math.max(60,THREE.MathUtils.radToDeg(2*Math.atan(Math.tan(THREE.MathUtils.degToRad(60/2))/Math.min(1,camera.aspect))))):Math.min(85,Math.max(47,THREE.MathUtils.radToDeg(2*Math.atan(Math.tan(THREE.MathUtils.degToRad(47/2))/Math.min(1,camera.aspect)))))):47;camera.updateProjectionMatrix();renderer.setPixelRatio(Math.min(devicePixelRatio,mobile?1.35:1.8));renderer.setSize(w,h);}
+const viewportObserver=new ResizeObserver(resizeViewer);viewportObserver.observe($('viewport'));window.addEventListener('resize',resizeViewer);resizeViewer();
+renderer.setAnimationLoop(()=>{const dt=Math.min(clock.getDelta(),.04); if(mode==='walk'&&model){if(navTransition)updateNavigation(dt);else walkStep(dt);} else controls.update(); if(mode!=='walk'&&layers.length) layers.forEach((g,i)=>g.position.y=THREE.MathUtils.lerp(g.position.y,mode==='explode'?i*spread:0,1-Math.exp(-5*dt))); for(const d of doorState){const blend=1-Math.exp(-8*dt);if(d.slide)d.pivotObj.position.x=THREE.MathUtils.lerp(d.pivotObj.position.x,d.pivot[0]+(d.open?d.slide:0),blend);else d.pivotObj.rotation.y=THREE.MathUtils.lerp(d.pivotObj.rotation.y,d.open?d.angle:0,blend);} renderer.render(scene,camera);updateTourOverlay(dt)});
+</script><script>setTimeout(()=>{if(!document.getElementById('loading').classList.contains('hidden')&&document.getElementById('bar').style.width==='')document.getElementById('loadtext').textContent='หากค้างที่หน้านี้ ให้ตรวจการเชื่อมต่ออินเทอร์เน็ตและเปิดผ่านเว็บเซิร์ฟเวอร์';},10000)</script></body></html>
