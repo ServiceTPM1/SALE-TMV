@@ -20,7 +20,7 @@
 @media(max-width:360px){.brand small{display:none}.brand{font-size:11px}.topbuttons button{width:38px}.modes button{font-size:11px}}
 @media(max-height:500px) and (pointer:coarse){.control-scroll{max-height:30dvh}.brand small{display:none}.panel{max-width:560px;left:50%;right:auto;transform:translateX(-50%);width:calc(100% - 20px)}.modes button{min-height:38px}#sheetToggle{min-height:28px}}
 
-#tourOverlay{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:2}#tourFade{position:absolute;inset:0;background:#090a0d;opacity:0;pointer-events:none;z-index:4} .tour-bubble{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:4px;padding:0;background:none!important;border:0;min-width:44px;min-height:44px;pointer-events:auto;touch-action:manipulation}.tour-bubble[hidden]{display:none!important}.tour-ring{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:2px solid #ead6b3;background:#f7e8d32b;box-shadow:0 0 0 5px #efdeb31c,0 2px 12px #0007;color:white;text-shadow:0 1px 3px #000;font-size:21px;font-weight:bold;backdrop-filter:blur(3px)}.tour-bubble.door .tour-ring{border-color:#e4c28a;background:#3c2919a8;color:#ffdfaa}.tour-bubble.opened .tour-ring{border-color:#a8ddc1;color:#a8ddc1}.tour-name{max-width:140px;padding:4px 8px;border-radius:10px;background:#111217de;border:1px solid #ffffff30;font-size:11px;line-height:1.25;white-space:nowrap;color:white;text-shadow:0 1px 2px #000}#tourQuick{display:none;position:absolute;top:8px;left:50%;transform:translateX(-50%);z-index:3;width:min(270px,90%);background:#111217e8;border:1px solid #ffffff30;border-radius:12px;padding:5px;pointer-events:auto}body.walk #tourQuick{display:block}#tourSelect{width:100%;background:#26282f;color:#fff;border:1px solid #ffffff25;border-radius:8px;padding:9px;font:inherit;font-size:13px;min-height:40px}#tourTitle{font-size:11px;line-height:1.4;text-align:center;color:#dfc59b;min-height:15px;margin-top:3px}body.walk #tourOverlay{display:block}body:not(.walk) #tourOverlay{display:none}@media(max-width:700px){#tourQuick{width:min(240px,90%)}.tour-ring{width:46px;height:46px}.tour-name{font-size:10px}body.walk.sheet-expanded #tourQuick{display:none}body.walk.sheet-expanded #tourOverlay{display:none}}
+#tourOverlay{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:2;display:none!important}#tourFade{position:absolute;inset:0;background:#090a0d;opacity:0;pointer-events:none;z-index:4} .tour-bubble{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:4px;padding:0;background:none!important;border:0;min-width:44px;min-height:44px;pointer-events:auto;touch-action:manipulation}.tour-bubble[hidden]{display:none!important}.tour-ring{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:2px solid #ead6b3;background:#f7e8d32b;box-shadow:0 0 0 5px #efdeb31c,0 2px 12px #0007;color:white;text-shadow:0 1px 3px #000;font-size:21px;font-weight:bold;backdrop-filter:blur(3px)}.tour-bubble.door .tour-ring{border-color:#e4c28a;background:#3c2919a8;color:#ffdfaa}.tour-bubble.opened .tour-ring{border-color:#a8ddc1;color:#a8ddc1}.tour-name{max-width:140px;padding:4px 8px;border-radius:10px;background:#111217de;border:1px solid #ffffff30;font-size:11px;line-height:1.25;white-space:nowrap;color:white;text-shadow:0 1px 2px #000}#tourQuick{display:none;position:absolute;top:8px;left:50%;transform:translateX(-50%);z-index:3;width:min(270px,90%);background:#111217e8;border:1px solid #ffffff30;border-radius:12px;padding:5px;pointer-events:auto}body.walk #tourQuick{display:block}#tourSelect{width:100%;background:#26282f;color:#fff;border:1px solid #ffffff25;border-radius:8px;padding:9px;font:inherit;font-size:13px;min-height:40px}#tourTitle{font-size:11px;line-height:1.4;text-align:center;color:#dfc59b;min-height:15px;margin-top:3px}body.walk #tourOverlay{display:block}body:not(.walk) #tourOverlay{display:none}@media(max-width:700px){#tourQuick{width:min(240px,90%)}.tour-ring{width:46px;height:46px}.tour-name{font-size:10px}body.walk.sheet-expanded #tourQuick{display:none}body.walk.sheet-expanded #tourOverlay{display:none}}
 
 #tourQuick{display:block;width:min(310px,90%)}body:not(.walk) #tourOverlay{display:block}#tourSelect,#doorSelect{width:100%;background:#26282f;color:#fff;border:1px solid #ffffff25;border-radius:8px;padding:8px;font:inherit;font-size:13px;min-height:40px}#travelTools{display:flex;gap:5px;margin-top:5px}#travelTools button{flex:1;font-size:12px;min-height:38px;padding:5px}#doorQuick{display:flex;gap:5px;margin-top:5px}#doorSelect{min-width:0;flex:1}#doorAction{min-width:48px;padding:5px 8px;font-size:12px}#mobile .flyKey{visibility:hidden}body.fly #mobile .flyKey{visibility:visible}#mobile{grid-template-columns:repeat(3,48px)}body.sheet-expanded #tourQuick,body.sheet-expanded #tourOverlay{display:none!important}@media(max-width:700px){#tourQuick{width:min(255px,90%);top:5px}#tourTitle{display:none}#travelTools button{min-height:36px}#doorQuick{margin-top:4px}#doorSelect{font-size:11px;min-height:36px}#mobile button{font-size:19px}body.walk #mobile{bottom:calc(var(--view-bottom,100px) + 5px)}}
 </style>
@@ -29,7 +29,7 @@
 <aside class="panel"><div class="eyebrow">EXPLORE THE VILLA</div><h2>เลือกมุมมอง</h2><div class="modes"><button data-mode="orbit" class="active">360° รอบบ้าน <small>01</small></button><button data-mode="explode">แยกชั้นบ้าน <small>02</small></button><button data-mode="walk">เดินชมบ้าน <small>03</small></button></div>
 <button id="sheetToggle" type="button" aria-expanded="false" aria-controls="controlScroll"><span class="chevron" aria-hidden="true">⌃</span><span id="sheetLabel">ตัวเลือกเพิ่มเติม</span></button><div id="controlScroll" class="control-scroll"><div id="orbitTools" class="section"><div class="row"><button id="auto">หมุนอัตโนมัติ</button><button id="top">มุมสูง</button></div><p>ลากเพื่อหมุน · เลื่อนเพื่อซูม · ลากสองนิ้วเพื่อเลื่อนตำแหน่ง</p></div>
 <div id="explodeTools" class="section hidden"><label for="spread">ระยะห่างระหว่างชั้น <span id="distance">3.0 ม.</span></label><input id="spread" type="range" min="0" max="5" step="0.1" value="3"><div class="checks"><label><input type="checkbox" data-layer="0" checked> ชั้น 1</label><label><input type="checkbox" data-layer="1" checked> ชั้น 2</label><label><input type="checkbox" data-layer="2" checked> หลังคา</label></div><div class="row" style="margin-top:10px"><button id="only1">ดูชั้น 1</button><button id="only2">ดูชั้น 2</button><button id="all">ทั้งหมด</button></div><div class="row" style="margin-top:6px"><button id="floorTop">มุมสูงดูแปลน</button></div></div>
-<div id="walkTools" class="section hidden"><div class="row"><button id="floor1" class="active">ชั้น 1</button><button id="floor2">ชั้น 2</button></div><p>W A S D หรือปุ่มลูกศรเพื่อเดิน · ลากภาพเพื่อหันมอง · Shift เพื่อเดินเร็ว</p><div class="row"><button id="spawn">กลับจุดเริ่มเดิน</button></div><div class="checks"><label><input type="checkbox" id="tourToggle" checked> แสดงจุดนำทางและปุ่มประตู</label></div><div class="row"><button id="tourDoorsClose">ปิดประตูทั้งหมดที่รองรับ</button></div></div>
+<div id="walkTools" class="section hidden"><div class="row"><button id="floor1" class="active">ชั้น 1</button><button id="floor2">ชั้น 2</button></div><p>W A S D หรือปุ่มลูกศรเพื่อเดิน · ลากภาพเพื่อหันมอง · Shift เพื่อเดินเร็ว</p><div class="row"><button id="spawn">กลับจุดเริ่มเดิน</button></div><div class="checks" style="display:none"><label><input type="checkbox" id="tourToggle"> แสดงจุดนำทางและปุ่มประตู</label></div><div class="row"><button id="tourDoorsClose">ปิดประตูทั้งหมดที่รองรับ</button></div></div>
 <div class="section"><strong>เลือกวัสดุผนังก่ออิฐเท่านั้น</strong><div class="row" style="margin-top:8px"><button id="finishColor" class="active">#AB9A88</button><button id="finishPaint">ผิวปูน</button><button id="finishShingle">Shingle</button></div><div class="checks" style="margin-top:8px"><div class="swatch"><span class="chip" style="background-image:url('./wall_plaster.jpg')"></span> ผิวปูน/เทกเจอร์</div><div class="swatch"><span class="chip" style="background-image:url('./wall_shingle.jpg')"></span> ลาย Shingle</div></div></div>
 <div class="section checks"><label><input id="furnToggle" type="checkbox" checked> แสดงเฟอร์นิเจอร์และสุขภัณฑ์</label><div style="display:flex;align-items:center;gap:7px"><span style="width:17px;height:17px;background:#AB9A88;border-radius:4px;border:1px solid #fff5"></span> สีมาตรฐาน #AB9A88</div></div><div class="tag">TMV · free tour edition</div></div></aside>
 <div id="mobile" class="hidden"><button class="flyKey" data-key="KeyE" aria-label="ลอยขึ้น">⇧</button><button data-key="KeyW">↑</button><button class="flyKey" data-key="KeyQ" aria-label="ลอยลง">⇩</button><button data-key="KeyA">←</button><button data-key="KeyS">↓</button><button data-key="KeyD">→</button></div><div id="crosshair" class="hidden"></div><div class="hint" id="hint">ลากเพื่อหมุนชมบ้าน 360° · ซูมเพื่อดูรายละเอียด</div><div class="status">3D MODEL · REAL SCALE</div><div class="loading" id="loading"><div><h1>THE MODERN VIEW</h1><p id="loadtext">กำลังโหลดโมเดลบ้าน 3D</p><div class="progress"><div id="bar"></div></div></div></div>
@@ -87,7 +87,7 @@ function applyLayers(){layers.forEach((g,i)=>{g.visible=mode==='explode'?visible
 function freeCam(){return travel!=='orbit'}
 function offset(f){return layers[f]?.position.y||0}
 function setTravel(t,keep=true){cancelNav();keys.clear();travel=t;controls.enabled=t==='orbit';controls.autoRotate=t==='orbit'&&mode==='orbit'&&auto;document.body.classList.toggle('walk',freeCam());document.body.classList.toggle('fly',t==='fly');$('mobile').classList.toggle('hidden',!freeCam());$('crosshair').classList.toggle('hidden',!freeCam());$('freeOrbit').classList.toggle('active',t==='orbit');$('freeWalk').classList.toggle('active',t==='walk');$('freeFly').classList.toggle('active',t==='fly');walkFill.visible=freeCam();if(freeCam()){camera.rotation.reorder('YXZ');yaw=camera.rotation.y;pitch=camera.rotation.x;walkY=camera.position.y-eye;if(t==='walk'&&keep&&model){const h=getFloor(camera.position.x,camera.position.z,walkY);if(h!==null)camera.position.y=(walkY=h)+eye;else {if(mode==='explode'&&!visible[floor])floor=visible[0]?0:1;spawn(floor)}}}else if(keep){controls.target.copy(camera.position).add(camera.getWorldDirection(new THREE.Vector3()).multiplyScalar(5));controls.update()}resizeViewer();}
-function setMode(m){cancelNav();mode=m;if(window.tmvMobileLayout.media.matches)window.tmvMobileLayout.setOpen(false);document.querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('active',b.dataset.mode===m));['orbit','explode','walk'].forEach(k=>$(k+'Tools').classList.toggle('hidden',k!==m));applyLayers();if(m==='walk'){layers.forEach(g=>g.position.y=0);model?.updateMatrixWorld(true);setTravel('walk',false);spawn(floor)}else {setTravel('orbit',false);resetOrbit()}$('hint').textContent={orbit:'หมุนชมบ้าน · เลือกห้องหรือเปิดโหมดเดิน/ลอย',explode:'แยกชั้น · เลือกห้องหรือลอยขึ้นลงด้วย Q/E',walk:'แตะฟองใสเพื่อเดินชม · W A S D · Q/E ในโหมดลอย'}[m]}
+function setMode(m){cancelNav();mode=m;if(window.tmvMobileLayout.media.matches)window.tmvMobileLayout.setOpen(false);document.querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('active',b.dataset.mode===m));['orbit','explode','walk'].forEach(k=>$(k+'Tools').classList.toggle('hidden',k!==m));applyLayers();if(m==='walk'){layers.forEach(g=>g.position.y=0);model?.updateMatrixWorld(true);setTravel('walk',false);spawn(floor)}else {setTravel('orbit',false);resetOrbit()}$('hint').textContent={orbit:'หมุนชมบ้าน · เลือกห้องจากเมนูด้านบน หรือเปิดโหมดเดิน/ลอย',explode:'แยกชั้น · เลือกห้องจากเมนู หรือใช้ Q/E เพื่อลอยขึ้นลง',walk:'เลือกห้องจากเมนู · W A S D เพื่อเดิน · Q/E ในโหมดลอย'}[m]}
 function getFloor(x,z,base){ray.set(new THREE.Vector3(x,base+.40,z),down);ray.near=0;ray.far=1.05;const hits=ray.intersectObjects([...structural.filter(o=>{for(let p=o;p;p=p.parent)if(!p.visible)return false;return true}),ground],false);return hits.find(h=>h.face&&Math.abs(h.face.normal.clone().transformDirection(h.object.matrixWorld).y)>.65)?.point.y??null}
 function canStand(x,z,base){const h=getFloor(x,z,base);if(h===null)return false;for(let i=0;i<8;i++){const a=i*Math.PI/4;ray.set(new THREE.Vector3(x,h+eye*.75,z),new THREE.Vector3(Math.cos(a),0,Math.sin(a)));ray.far=.55;ray.near=0;if(ray.intersectObjects(activeObstacles(),false).length)return false;}return true}
 function spawn(f){cancelNav();selectedPoint=null;floor=f;walkY=foot[f]+offset(f);let start=f===0?[0,7.8]:[-1,0];if(model){let found=false;for(const z of (f===0?[7.8,6,4,2,0,-2,-4,-6,-8]:[0,2,-2,4,-4,6,-6])){for(const x of [0,1,-1,2,-2,3,-3,4,-4,5,-5,6,-6])if(canStand(x,z,foot[f]+offset(f))){start=[x,z];found=true;break;}if(found)break;}walkY=getFloor(start[0],start[1],foot[f]+offset(f))??(foot[f]+offset(f))}camera.position.set(start[0],walkY+eye,start[1]);yaw=0;pitch=0;camera.rotation.order='YXZ';camera.rotation.set(pitch,yaw,0);$('floor1').classList.toggle('active',f===0);$('floor2').classList.toggle('active',f===1)}
@@ -95,58 +95,84 @@ function blocked(dir,len){for(const h of [.40,1.2,1.57]){ray.set(new THREE.Vecto
 function walkStep(dt){let z=(keys.has('KeyW')||keys.has('ArrowUp')?1:0)-(keys.has('KeyS')||keys.has('ArrowDown')?1:0),x=(keys.has('KeyD')||keys.has('ArrowRight')?1:0)-(keys.has('KeyA')||keys.has('ArrowLeft')?1:0),up=(keys.has('KeyE')||keys.has('Space')?1:0)-(keys.has('KeyQ')||keys.has('KeyC')?1:0);if(!x&&!z&&!up)return;const fast=keys.has('ShiftLeft');if(travel==='fly'){const dir=camera.getWorldDirection(new THREE.Vector3()),right=new THREE.Vector3().crossVectors(dir,new THREE.Vector3(0,1,0)).normalize();v.copy(dir).multiplyScalar(z).addScaledVector(right,x).add(new THREE.Vector3(0,up,0));if(v.lengthSq())camera.position.addScaledVector(v.normalize(),dt*(fast?12:4.2));walkY=camera.position.y-eye;return;}if(!x&&!z)return;v.set(x,0,-z).normalize().applyAxisAngle(new THREE.Vector3(0,1,0),yaw);const step=dt*(fast?3.1:1.7);if(blocked(v,step))return;const nx=camera.position.x+v.x*step,nz=camera.position.z+v.z*step;const h=getFloor(nx,nz,walkY);if(h===null||Math.abs(h-walkY)>.40)return;walkY=h;camera.position.set(nx,walkY+eye,nz);floor=walkY>=foot[1]+offset(1)-.3?1:0;}
 function makeBathroomSet(reverseToilet=false){
  const g=new THREE.Group();
- const stone=new THREE.MeshStandardMaterial({color:0xa69e92,roughness:.84});
- const tile=new THREE.MeshStandardMaterial({color:0x988f84,roughness:.85});
- const dark=new THREE.MeshStandardMaterial({color:0x17191b,roughness:.45,metalness:.35});
- const ceramic=new THREE.MeshStandardMaterial({color:0x17191a,roughness:.24,metalness:.08});
- const interior=new THREE.MeshStandardMaterial({color:0x121416,roughness:.86});
- const steel=new THREE.MeshStandardMaterial({color:0x85878b,roughness:.3,metalness:.8});
- const fabric=new THREE.MeshStandardMaterial({color:0x716c62,roughness:1});
- const curtain=new THREE.MeshStandardMaterial({color:0xc9c3b9,roughness:.95,side:THREE.DoubleSide});
+ const stone=new THREE.MeshStandardMaterial({color:0xb8afa3,roughness:.88});
+ const tile=new THREE.MeshStandardMaterial({color:0x9e958a,roughness:.90});
+ const dark=new THREE.MeshStandardMaterial({color:0x15171a,roughness:.42,metalness:.35});
+ const ceramic=new THREE.MeshStandardMaterial({color:0x17191b,roughness:.24,metalness:.10});
+ const inner=new THREE.MeshStandardMaterial({color:0x121315,roughness:.92});
+ const steel=new THREE.MeshStandardMaterial({color:0x8b8f94,roughness:.24,metalness:.85});
+ const curtain=new THREE.MeshStandardMaterial({color:0xcfc8bc,roughness:.98,side:THREE.DoubleSide});
+ const mat=new THREE.MeshStandardMaterial({color:0x6d695f,roughness:1});
  function mesh(geo,mat,x,y,z){const o=new THREE.Mesh(geo,mat);o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;g.add(o);return o;}
  function box(w,h,d,x,y,z,mat,r=0){return mesh(r?new RoundedBoxGeometry(w,h,d,3,r):new THREE.BoxGeometry(w,h,d),mat,x,y,z)}
- function pipe(points,r,mat=dark){return mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points.map(p=>new THREE.Vector3(...p))),24,r,10,false),mat,0,0,0)}
  function cyl(r,h,x,y,z,mat){return mesh(new THREE.CylinderGeometry(r,r,h,24),mat,x,y,z)}
- // Footprint: length 3.6 m, width 1.5 m; all fixtures fit inside the bathroom.
- // One-piece black toilet, rounded sculpted bowl, lid and tank. Front faces the passage.
- const profile=[[.0,0],[.15,0],[.18,.035],[.19,.12],[.22,.28],[.235,.37],[.225,.415],[.18,.425],[.0,.425]].map(p=>new THREE.Vector2(...p));
- const bowl=mesh(new THREE.LatheGeometry(profile,48),ceramic,.68,0,-.33);bowl.scale.set(1.0,1,1.32);
- box(.46,.055,.64,.68,.44,-.32,ceramic,.055);box(.44,.38,.19,.68,.37,-.60,ceramic,.045);box(.45,.06,.20,.68,.57,-.60,ceramic,.025);cyl(.035,.01,.68,.608,-.60,steel);
- pipe([[.25,.48,-.67],[.25,.17,-.65],[.39,.12,-.55],[.42,.45,-.65]],.008);box(.035,.16,.025,.42,.53,-.65,dark,.009);
- if(reverseToilet){const toiletParts=[...g.children];const toilet=new THREE.Group();toilet.position.set(.68,0,.02);g.add(toilet);for(const o of toiletParts){toilet.add(o);o.position.x-=.68;o.position.z+=.33;}toilet.rotation.y=Math.PI;toilet.position.z=.33;}
- // Tiled basin with a real open recess and open storage niche, not solid blocks.
- const vx=2.0,vz=.39,ww=.86,dd=.59,hh=.84;
- box(.08,.69,dd,vx-ww/2+.04,.345,vz,stone);box(.08,.69,dd,vx+ww/2-.04,.345,vz,stone);box(ww,.09,dd,vx,.045,vz,stone);box(ww,.61,.045,vx,.38,vz+.27,stone);
- const bx=.52,bz=.34;
- box((ww-bx)/2,.10,dd,vx-(ww+bx)/4,.79,vz,stone);box((ww-bx)/2,.10,dd,vx+(ww+bx)/4,.79,vz,stone);
- box(bx,.10,(dd-bz)/2,vx,.79,vz-(dd+bz)/4,stone);box(bx,.10,(dd-bz)/2,vx,.79,vz+(dd+bz)/4,stone);
- box(bx,.035,bz,vx,.625,vz,tile);box(.035,.14,bz,vx-bx/2,.70,vz,tile);box(.035,.14,bz,vx+bx/2,.70,vz,tile);box(bx,.14,.035,vx,.70,vz-bz/2,tile);box(bx,.14,.035,vx,.70,vz+bz/2,tile);cyl(.027,.006,vx,.646,vz,steel);
- pipe([[vx,.84,vz+.23],[vx,1.06,vz+.23],[vx,1.08,vz+.12],[vx,1.06,vz+.02]],.019);box(.06,.018,.025,vx+.04,1.04,vz+.22,dark,.006);
- box(.23,.29,.28,vx,.24,vz+.05,interior,.035);box(.25,.035,.29,vx,.40,vz+.05,dark,.015);
- // Three stairs leading to a recessed tiled shower/bathing area.
- const wetZ=-.28;
- for(let i=0;i<3;i++){const x=1.64+i*.28,h=(i+1)*.15;box(.28,h,.75,x,h/2,wetZ,tile);box(.22,.014,.55,x,h+.008,wetZ,fabric,.012);}
- const tx=2.94,tw=.97,td=1.33,tz=0,th=.48;
- box(tw,.06,td,tx,.03,tz,tile);box(.085,th,td,tx-tw/2+.0425,th/2,tz,tile);box(.085,th,td,tx+tw/2-.0425,th/2,tz,tile);box(tw,th,.085,tx,th/2,tz-td/2+.0425,tile);box(tw,th,.085,tx,th/2,tz+td/2-.0425,tile);cyl(.033,.008,tx,.065,tz,steel);
- // Black rain shower, perforations, hand shower, flexible hose and heater.
- const showerX=3.43;
- box(.05,.18,.18,showerX,1.08,-.15,dark,.008);cyl(.023,.045,showerX-.035,1.08,-.15,dark).rotation.z=Math.PI/2;
- pipe([[showerX,1.04,.24],[showerX-.04,.65,.24],[showerX-.22,.58,.24],[showerX-.23,.8,.24],[showerX-.1,1.43,.24]],.009);
- box(.04,.25,.055,showerX-.09,1.51,.24,dark,.012);
- pipe([[showerX,2.1,-.12],[showerX-.18,2.1,-.12],[showerX-.45,2.1,-.12],[showerX-.45,2.04,-.12]],.015);
- box(.27,.037,.27,showerX-.45,2.035,-.12,dark,.008);
- for(let a=0;a<6;a++)for(let k=0;k<6;k++)cyl(.0035,.008,showerX-.45+(a-2.5)*.037,2.013,-.12+(k-2.5)*.037,steel);
- box(.09,.32,.20,showerX,1.77,.44,steel,.022);box(.014,.09,.11,showerX-.052,1.75,.44,interior,.008);
- // Fine pleated curtain panel along the bath window, hung from a dark rail.
- pipe([[2.48,2.20,.69],[3.43,2.20,.69]],.012);
- const pos=[],ind=[];const nx=80;for(let k=0;k<=nx;k++){let x=2.49+.91*k/nx,z=.65+.022*Math.cos(k/nx*2*Math.PI*9);pos.push(x,.91,z,x,2.17,z);if(k<nx){let i=k*2;ind.push(i,i+2,i+1,i+1,i+2,i+3);}}
+ function pipe(points,r,mat=dark){return mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points.map(p=>new THREE.Vector3(...p))),24,r,10,false),mat,0,0,0)}
+ 
+ // Compact wall-hugging layout: shower left, steps center, vanity + toilet grouped on right wall.
+ const showerX=.64, showerZ=0.00;
+ box(1.18,.48,1.36,showerX,.24,showerZ,tile,.02);                    // recessed shower/bath body
+ box(1.10,.06,1.28,showerX,.51,showerZ,stone,.012);                  // top lip
+ box(.90,.03,1.08,showerX,.50,showerZ,inner,.006);                   // wet floor recess
+ box(.05,.15,1.34,showerX-.57,.575,showerZ,tile);                    // back curb
+ box(1.18,.15,.05,showerX,.575,showerZ-.655,tile);
+ box(1.18,.15,.05,showerX,.575,showerZ+.655,tile);
+ 
+ // Three attached steps directly beside the shower.
+ const sx=1.39;
+ for(let i=0;i<3;i++){
+   const xx=sx+i*.20, hh=.10*(i+1);
+   box(.20,hh,.54,xx,hh/2,-.36,tile,.01);
+   box(.16,.012,.42,xx,hh+.008,-.36,mat,.006);
+ }
+ 
+ // Vanity block fixed to the right wall.
+ const vanityX=2.22, vanityZ=.29;
+ box(.84,.82,.54,vanityX,.41,vanityZ,stone,.02);
+ box(.48,.18,.28,vanityX,.64,vanityZ,tile,.01);
+ box(.20,.26,.26,vanityX,.20,vanityZ+.07,inner,.02);
+ box(.22,.03,.27,vanityX,.38,vanityZ+.07,dark,.008);
+ cyl(.024,.006,vanityX,.635,vanityZ,steel);
+ pipe([[vanityX+.15,.82,vanityZ+.18],[vanityX+.15,1.03,vanityZ+.18],[vanityX+.15,1.05,vanityZ+.07],[vanityX+.02,1.03,vanityZ+.01]],.016);
+ box(.05,.015,.02,vanityX+.05,1.01,vanityZ+.17,dark,.005);
+ 
+ // Toilet fixed to the same wall, directly next to the vanity.
+ const toiletZ = reverseToilet ? .56 : -.26;
+ const toiletX = 2.20;
+ const profile=[[.0,0],[.14,0],[.17,.04],[.19,.13],[.21,.28],[.225,.38],[.215,.42],[.16,.43],[.0,.43]].map(p=>new THREE.Vector2(...p));
+ const bowl=mesh(new THREE.LatheGeometry(profile,40),ceramic,toiletX,0,toiletZ); bowl.scale.set(1,1,1.18);
+ box(.44,.055,.58,toiletX,.43,toiletZ,ceramic,.04);
+ box(.42,.34,.18,toiletX,.36,toiletZ-.28,ceramic,.03);
+ box(.43,.055,.20,toiletX,.54,toiletZ-.28,ceramic,.02);
+ cyl(.03,.008,toiletX,.575,toiletZ-.28,steel);
+ pipe([[toiletX-.18,.47,toiletZ-.34],[toiletX-.18,.18,toiletZ-.34],[toiletX-.02,.12,toiletZ-.24],[toiletX-.02,.42,toiletZ-.34]],.008);
+ box(.03,.15,.02,toiletX-.02,.50,toiletZ-.34,dark,.008);
+ 
+ // Shower hardware and heater on the shower wall.
+ const wallX=1.02;
+ box(.05,.18,.18,wallX,1.08,-.40,dark,.008);
+ cyl(.022,.045,wallX-.035,1.08,-.40,dark).rotation.z=Math.PI/2;
+ pipe([[wallX,1.04,-.02],[wallX-.04,.66,-.02],[wallX-.17,.58,-.02],[wallX-.18,.80,-.02],[wallX-.08,1.44,-.02]],.0085);
+ box(.04,.24,.05,wallX-.08,1.50,-.02,dark,.01);
+ pipe([[wallX,2.08,-.33],[wallX-.15,2.08,-.33],[wallX-.36,2.08,-.33],[wallX-.36,2.03,-.33]],.014);
+ box(.24,.034,.24,wallX-.36,2.02,-.33,dark,.008);
+ box(.10,.32,.18,.12,1.78,-.52,steel,.02);
+ box(.012,.09,.10,.07,1.76,-.52,inner,.004);
+ 
+ // Curtain along the exterior wall side of the shower.
+ pipe([[.02,2.16,.70],[1.15,2.16,.70]],.011);
+ const pos=[],ind=[];const nx=64;for(let k=0;k<=nx;k++){let x=.05+1.06*k/nx,z=.67+.018*Math.cos(k/nx*2*Math.PI*8);pos.push(x,.92,z,x,2.12,z);if(k<nx){let i=k*2;ind.push(i,i+2,i+1,i+1,i+2,i+3);}}
  const cg=new THREE.BufferGeometry();cg.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));cg.setIndex(ind);cg.computeVertexNormals();mesh(cg,curtain,0,0,0);
  return g;
 }
 function addBathroomFixtures(){
- // Measured bathroom cells from the floor plans. Independent of sanitized GLTF node names.
- const placements=[{f:0,p:[3.65,.60,-3.53],rot:0},{f:0,p:[3.65,.60,-1.62],rot:0},{f:1,p:[-3.95,3.95,1.68],rot:Math.PI},{f:1,p:[3.65,3.95,-.97],rot:0}];
- placements.forEach((p,i)=>{const set=makeBathroomSet(i===0||i===3);set.name='Bathroom_'+(i+1);set.position.set(...p.p);set.rotation.y=p.rot;layers[p.f].add(set);furnitureRoots.push(set);set.traverse(o=>{if(o.isMesh)obstacles.push(o)});});
+ // Compact placement inside each bathroom zone. Reverse toilets in bedroom 2 on each floor.
+ const placements=[
+   {f:0,p:[3.82,.60,-3.53],rot:0,rev:false},
+   {f:0,p:[3.82,.60,-1.62],rot:0,rev:true},
+   {f:1,p:[-4.10,3.95,1.68],rot:Math.PI,rev:false},
+   {f:1,p:[3.82,3.95,-.97],rot:0,rev:true}
+ ];
+ placements.forEach((p,i)=>{const set=makeBathroomSet(p.rev);set.name='Bathroom_'+(i+1);set.position.set(...p.p);set.rotation.y=p.rot;layers[p.f].add(set);furnitureRoots.push(set);set.traverse(o=>{if(o.isMesh)obstacles.push(o)});});
 }
 function markWallCandidates(){
  model.traverse(o=>{if(o.isMesh&&o.material?.name==='TMV_MASONRY_ONLY')wallCandidates.push(o)});
@@ -189,7 +215,7 @@ const tourPoints=[
  {f:1,n:'Skywalk',x:-.4,z:-5.35,yaw:-1.57}, {f:1,n:'ลงชั้น 1',x:-3.0,z:-4.3,yaw:3.14,stairs:true,go:0}
 ];
 const doorState=[], tourRay=new THREE.Raycaster(), worldPoint=new THREE.Vector3(), screenPoint=new THREE.Vector3(), eyeDir=new THREE.Vector3();
-let showTour=true, navTransition=null, overlayElapsed=1, selectedPoint=null;
+let showTour=false, navTransition=null, overlayElapsed=1, selectedPoint=null;
 const navOverlay=$('tourOverlay'), navFade=$('tourFade'), navSelect=$('tourSelect'), navTitle=$('tourTitle');
 function tourMessage(s){navTitle.textContent=s;}
 function cancelNav(){navTransition=null;navFade.style.opacity='0';}
